@@ -70,42 +70,14 @@
     //first of all ,we need to eliminate negative conditions
     if (selectedIndex == index) return;
     selectedIndex = index;
+    if ([self.segmentDelegate respondsToSelector:@selector(wqSegmentSelectIndex:)]) {
+        [self.segmentDelegate wqSegmentSelectIndex:index];
+    }
     [UIView beginAnimations:@"" context:nil];
     [UIView setAnimationDuration:0.2];
     CGRect lineRC  = [self viewWithTag:selectedIndex+kButtonTagStart].frame;
     lineView.frame = CGRectMake(lineRC.origin.x, self.frame.size.height - 2, lineRC.size.width, 2);
     [UIView commitAnimations];
-    
-    NSInteger line_off_x = lineRC.origin.x;
-
-    /*
-     if (sender.frame.origin.x - self.contentOffset.x > CONTENTSIZEX-(BUTTONGAP+BUTTONWIDTH)) {
-     [self setContentOffset:CGPointMake((BUTTONID-4)*(BUTTONGAP+BUTTONWIDTH)+45, 0)  animated:YES];
-     }
-     
-     if (sender.frame.origin.x - self.contentOffset.x < 5) {
-     [self setContentOffset:CGPointMake(BUTTONID*(BUTTONGAP+BUTTONWIDTH), 0)  animated:YES];
-     }
-     */
-    
-    index = selectedIndex;
-    if ((line_off_x - self.contentOffset.x) > 320 * 0.7) {
-        if (selectedIndex + 2 < pageSum) {
-            index = selectedIndex + 2;
-        }else if (selectedIndex + 1 < pageSum)
-        {
-            index = selectedIndex + 1;
-        }
-    }else if (line_off_x - self.contentOffset.x < 320 * 0.3){
-        if (selectedIndex - 2 > 0) {
-            index = selectedIndex - 2;
-        }else if (selectedIndex - 1 > 0){
-            index = selectedIndex -1;
-        }
-    }
-    
-    lineRC = [self viewWithTag:index + kButtonTagStart].frame;
-    [self scrollRectToVisible:lineRC animated:YES];
 }
 
 -(void)setLineOffsetWithPage:(float)page andRatio:(float)ratio
@@ -123,7 +95,21 @@
     }
     float x = lineRC.origin.x + (lineRC2.origin.x - lineRC.origin.x)*ratio;
     lineView.frame = CGRectMake(x,  self.frame.size.height - 2,width,2);
-    [self selectIndex:page];
+    selectedIndex = page;
+    
+    if ((x - self.contentOffset.x) > 320 * 0.65) {
+        CGFloat off_x = self.contentOffset.x + 80;
+        if ((off_x + 320) > self.contentSize.width){
+            off_x = self.contentSize.width - 320;
+        }
+        [self setContentOffset:CGPointMake(off_x, 0) animated:YES];
+        return;
+    }else if((x-self.contentOffset.x) < 320 * 0.35){
+        CGFloat off_x = self.contentOffset.x  - 80;
+        if (off_x <= 0)off_x = 0;
+        [self setContentOffset:CGPointMake(off_x, 0) animated:YES];
+        return;
+    }
 }
 
 

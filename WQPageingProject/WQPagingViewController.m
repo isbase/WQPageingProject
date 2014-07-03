@@ -8,7 +8,7 @@
 
 #import "WQPagingViewController.h"
 #import "WQTitlePagerView.h"
-#import "WQSegmentPageView.h"
+
 
 @interface WQPagingViewController ()
 {
@@ -76,16 +76,23 @@
         
         //中间
         segmentView = [[WQSegmentPageView alloc] initWithFrame:CGRectMake(0, 64, 320, 25) withItems:_titleArray];
+        segmentView.segmentDelegate = self;
         [self.view addSubview:segmentView];
         
     }
     
 }
 
+-(void)wqSegmentSelectIndex:(NSInteger)index{
+
+    [contentView setContentOffset:CGPointMake(320 * index, 0) animated:NO];
+}
+
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
     int page = (int)scrollView.contentOffset.x / 320 ;
     float radio = (float)((int)scrollView.contentOffset.x % 320)/320;
     [segmentView setLineOffsetWithPage:page andRatio:radio];
+    //[segmentView selectIndex:page];
 }
 
 - (void)viewDidLayoutSubviews {

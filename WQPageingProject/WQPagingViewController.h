@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface WQPagingViewController : UIViewController<UIScrollViewDelegate>
+#import "WQSegmentPageView.h"
+@interface WQPagingViewController : UIViewController<UIScrollViewDelegate,WQsegmentIndexDelegate>
 
 
 -(instancetype)initWithChildViewControllers:(NSArray *)viewControllers andTitles:(NSArray *)titleArray;
