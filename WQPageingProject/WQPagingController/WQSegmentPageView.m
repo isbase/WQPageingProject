@@ -97,19 +97,74 @@
     lineView.frame = CGRectMake(x,  self.frame.size.height - 2,width,2);
     selectedIndex = page;
     
-    if ((x - self.contentOffset.x) > 320 * 0.65) {
-        CGFloat off_x = self.contentOffset.x + 80;
-        if ((off_x + 320) > self.contentSize.width){
-            off_x = self.contentSize.width - 320;
-        }
-        [self setContentOffset:CGPointMake(off_x, 0) animated:YES];
-        return;
-    }else if((x-self.contentOffset.x) < 320 * 0.35){
-        CGFloat off_x = self.contentOffset.x  - 80;
-        if (off_x <= 0)off_x = 0;
-        [self setContentOffset:CGPointMake(off_x, 0) animated:YES];
-        return;
+    
+    
+    if ((lineRC.origin.x - self.contentOffset.x) > 160) {
+        lineRC = [self ADDOrigin_x:80 withRect:lineRC];
+    }else if (lineRC.origin.x > (self.contentSize.width - 320)){
+        lineRC = [self setOrigin_x:self.contentSize.width - 320 withRect:lineRC];
+    }else if ((lineRC.origin.x - self.contentOffset.x) < 50) {
+        lineRC = [self ADDOrigin_x:-80 withRect:lineRC];
     }
+    
+    if (lineRC.origin.x < 50) {
+        lineRC  = [self setOrigin_x:0 withRect:lineRC];
+    }
+    
+    [self scrollRectToVisible:lineRC animated:YES];
+    
+/**
+ * test Code
+     if ((x - self.contentOffset.x) > 320 * 0.65){
+     
+     if ((lineRC.origin.x - self.contentOffset.x) > 160) {
+     lineRC = [self ADDOrigin_x:80 withRect:lineRC];
+     }
+     }else if ((x-self.contentOffset.x) < 320 * 0.35){
+     if ((lineRC.origin.x - self.contentOffset.x) < 50) {
+     lineRC = [self ADDOrigin_x:-80 withRect:lineRC];
+     }
+     if (lineRC.origin.x < 50) {
+     lineRC  = [self setOrigin_x:0 withRect:lineRC];
+     }
+     }
+     
+*/
+    
+    
+    
+/**
+* 快速滑动有问题
+     CGFloat off_x = self.contentOffset.x;
+ 
+     if ((x - self.contentOffset.x) > 320 * 0.65) {
+     off_x += 80;
+     if ((off_x + 320) > self.contentSize.width){
+     off_x = self.contentSize.width - 320;
+     }
+     [self setContentOffset:CGPointMake(off_x, 0) animated:YES];
+     return;
+     }else if((x-self.contentOffset.x) < 320 * 0.35){
+     off_x -= 80;
+     if (off_x <= 0)off_x = 0;
+     [self setContentOffset:CGPointMake(off_x, 0) animated:YES];
+     return;
+     }
+*/
+}
+
+-(CGRect)ADDOrigin_x:(CGFloat)x withRect:(CGRect)originalRC
+{
+    CGRect frame = originalRC;
+    frame.origin.x += x;
+    return frame;
+}
+
+-(CGRect)setOrigin_x:(CGFloat)x withRect:(CGRect)originalRC
+{
+    CGRect frame = originalRC;
+    frame.origin.x = x;
+    return frame;
 }
 
 
