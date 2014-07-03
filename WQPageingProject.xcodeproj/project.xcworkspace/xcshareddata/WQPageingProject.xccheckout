@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>22E19F71-2735-4FAA-97E3-85F39EF34DD5</string>
+	<key>IDESourceControlProjectName</key>
+	<string>WQPageingProject</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>3E8C72D5-B16A-492B-BCCB-8B9E80AC8FAE</key>
+		<string>https://github.com/isbase/WQPROJECTS.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>WQPageingProject.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>3E8C72D5-B16A-492B-BCCB-8B9E80AC8FAE</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/isbase/WQPROJECTS.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>3E8C72D5-B16A-492B-BCCB-8B9E80AC8FAE</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>3E8C72D5-B16A-492B-BCCB-8B9E80AC8FAE</string>
+			<key>IDESourceControlWCCName</key>
+			<string>WQPROJECTS</string>
+		</dict>
+	</array>
+</dict>
+</plist>
