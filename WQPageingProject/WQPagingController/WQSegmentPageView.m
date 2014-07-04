@@ -30,6 +30,12 @@
         self.backgroundColor = [UIColor lightGrayColor];
         _isObservingScrollView = NO;
         selectedIndex = 0;
+        
+        CGRect rc  = [self viewWithTag:selectedIndex+kButtonTagStart].frame;
+        lineView = [[UIView alloc]initWithFrame:CGRectMake(rc.origin.x, 5, rc.size.width, self.frame.size.height - 10)];
+        lineView.backgroundColor = [UIColor colorWithRed:190.0/255.1 green:2.0/255.0 blue:1.0/255.0 alpha:1];
+        [self addSubview:lineView];
+        
         __block int offset_x = 10;
         [itmes enumerateObjectsUsingBlock:^(NSString *title, NSUInteger idx, BOOL *stop) {
             UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -40,7 +46,7 @@
             button.tag = kButtonTagStart + idx;
             [button setTitle:title forState:UIControlStateNormal];
             CGSize size = [title sizeWithFont:[UIFont systemFontOfSize:15] constrainedToSize:CGSizeMake(MAXFLOAT, 25)];
-            button.frame = CGRectMake(offset_x, 0, size.width, 25);
+            button.frame = CGRectMake(offset_x, 5, size.width + 10, 25);
             [button addTarget:self action:@selector(onButtonClick:) forControlEvents:UIControlEventTouchUpInside];
             [self addSubview:button];
             offset_x += size.width + 20;
@@ -52,10 +58,7 @@
         self.contentSize = CGSizeMake(offset_x, 25);
         self.showsHorizontalScrollIndicator = NO;
         
-        CGRect rc  = [self viewWithTag:selectedIndex+kButtonTagStart].frame;
-        lineView = [[UIView alloc]initWithFrame:CGRectMake(rc.origin.x, self.frame.size.height - 2, rc.size.width, 2)];
-        lineView.backgroundColor = [UIColor colorWithRed:190.0/255.1 green:2.0/255.0 blue:1.0/255.0 alpha:1];
-        [self addSubview:lineView];
+       
     }
     return self;
 }
@@ -76,7 +79,7 @@
     [UIView beginAnimations:@"CustomerAnimation" context:nil];
     [UIView setAnimationDuration:0.2];
     CGRect lineRC  = [self viewWithTag:selectedIndex+kButtonTagStart].frame;
-    lineView.frame = CGRectMake(lineRC.origin.x, self.frame.size.height - 2, lineRC.size.width, 2);
+    lineView.frame = CGRectMake(lineRC.origin.x, lineView.frame.origin.y, lineRC.size.width, lineView.frame.size.height);
     [UIView commitAnimations];
 }
 
@@ -94,7 +97,7 @@
         width =  lineRC.size.width + (lineRC2.size.width-lineRC.size.width)*ratio;
     }
     float x = lineRC.origin.x + (lineRC2.origin.x - lineRC.origin.x)*ratio;
-    lineView.frame = CGRectMake(x,  self.frame.size.height - 2,width,2);
+    lineView.frame = CGRectMake(x, lineView.frame.origin.y,width,lineView.frame.size.height);
     selectedIndex = page;
     
     

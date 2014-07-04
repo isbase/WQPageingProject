@@ -47,7 +47,7 @@
 {
     [super viewDidLoad];
     CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
-    contentView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 44 + 25, 320, screenHeight - 44 - 25)];
+    contentView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 44 + 25, 320, screenHeight - 44 - 35)];
     contentView.pagingEnabled = YES;
     contentView.delegate = self;
     contentView.directionalLockEnabled = YES;
@@ -66,8 +66,10 @@
     [self.view addSubview:contentView];
     
     if ([_titleArray count] > 0) {
-        
-        //顶部
+        /**
+         * top bar 
+         * If you want to use in the navigation bar, you only need to set the WQTitlePagerView‘s instance in the navigation's titleView
+         */
         WQTitlePagerView *titleView = [[WQTitlePagerView alloc] initWithFrame:CGRectMake(0, 20, 150, 44)];
         [titleView addObjects:_titleArray];
         [titleView addobserverScrollView:contentView];
@@ -75,7 +77,7 @@
         titleView.center = CGPointMake(160, titleView.center.y);
         
         //中间
-        segmentView = [[WQSegmentPageView alloc] initWithFrame:CGRectMake(0, 64, 320, 25) withItems:_titleArray];
+        segmentView = [[WQSegmentPageView alloc] initWithFrame:CGRectMake(0, 64, 320, 35) withItems:_titleArray];
         segmentView.segmentDelegate = self;
         [self.view addSubview:segmentView];
         
