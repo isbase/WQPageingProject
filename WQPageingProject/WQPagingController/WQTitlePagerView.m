@@ -12,10 +12,10 @@
 
 @interface WQTitlePagerView ()
 
-@property (strong, nonatomic) UIScrollView *scrollView;         //title scrollview
-@property (strong, nonatomic) UIPageControl *pageControl;       //title pageControl
-@property (weak, nonatomic) UIScrollView *observedScrollView;   //observed Father ScrolleView
-@property (strong, nonatomic) NSMutableArray *views;            //Title Subviews .like lable or image
+@property (strong, nonatomic)   UIScrollView    *scrollView;         //title scrollview
+@property (strong, nonatomic)   UIPageControl   *pageControl;       //title pageControl
+@property (weak, nonatomic)     UIScrollView    *observedScrollView;   //observed Father ScrolleView
+@property (strong, nonatomic)   NSMutableArray  *views;            //Title Subviews .like lable or image
 @end
 
 
@@ -129,7 +129,13 @@
         if (diff < 0)diff = 0;
         CGFloat alpha = scrollViewWidth / 100 * diff / 100 + 0.15f;
         view.alpha = alpha;
+        
+        if (self.observedScrollView.contentOffset.x <=0) {
+            view.alpha = 1;
+        }
     }];
+    
+    
 }
 
 #pragma mark - Getters & setters
