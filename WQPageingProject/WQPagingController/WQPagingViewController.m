@@ -82,22 +82,23 @@
     }
     
 }
-
--(void)wqSegmentSelectIndex:(NSInteger)index{
-
-    [contentView setContentOffset:CGPointMake(320 * index, 0) animated:NO];
-}
-
--(void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    int page = (int)scrollView.contentOffset.x / 320 ;
-    float radio = (float)((int)scrollView.contentOffset.x % 320)/320;
-    [segmentView setLineOffsetWithPage:page andRatio:radio];
-    //[segmentView selectIndex:page];
-}
-
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     [contentView setContentSize:CGSizeMake([_viewControllers count] * 320, contentView.frame.size.height - 20)];
+}
+
+#pragma mark -  以下方法只在SegmentPageView中使用
+-(void)wqSegmentSelectIndex:(NSInteger)index{
+    
+    [contentView setContentOffset:CGPointMake(320 * index, 0) animated:NO];
+}
+
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    if (scrollView.contentOffset.x < 0 || scrollView.contentOffset.x > scrollView.contentSize.width - 320) return;
+    int page = (int)scrollView.contentOffset.x / 320 ;
+    float radio = (float)((int)scrollView.contentOffset.x % 320)/320;
+    [segmentView setLineOffsetWithPage:page andRatio:radio];
 }
 
 @end

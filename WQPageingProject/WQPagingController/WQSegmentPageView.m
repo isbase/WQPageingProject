@@ -73,7 +73,7 @@
     if ([self.segmentDelegate respondsToSelector:@selector(wqSegmentSelectIndex:)]) {
         [self.segmentDelegate wqSegmentSelectIndex:index];
     }
-    [UIView beginAnimations:@"" context:nil];
+    [UIView beginAnimations:@"CustomerAnimation" context:nil];
     [UIView setAnimationDuration:0.2];
     CGRect lineRC  = [self viewWithTag:selectedIndex+kButtonTagStart].frame;
     lineView.frame = CGRectMake(lineRC.origin.x, self.frame.size.height - 2, lineRC.size.width, 2);
@@ -96,7 +96,6 @@
     float x = lineRC.origin.x + (lineRC2.origin.x - lineRC.origin.x)*ratio;
     lineView.frame = CGRectMake(x,  self.frame.size.height - 2,width,2);
     selectedIndex = page;
-    
     
     
     if ((lineRC.origin.x - self.contentOffset.x) > 160) {
