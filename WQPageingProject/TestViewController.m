@@ -24,6 +24,13 @@
     return self;
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    NSLog(@"%@  %s",self.labelTitle,__PRETTY_FUNCTION__);
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
